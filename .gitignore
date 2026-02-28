@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Testing & coverage
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# Type checking
+.mypy_cache/
+
+# Linting
+.ruff_cache/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Trained model artefacts (large binaries — store in DVC or similar)
+models/*.joblib
+
+# Raw data (not committed — too large / sensitive)
+data/raw/
+data/processed/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code session files
+.claude/
