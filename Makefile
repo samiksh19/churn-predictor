@@ -19,7 +19,7 @@ format:
 	ruff check --fix src tests
 
 typecheck:
-	mypy src
+	mypy src tests
 
 run:
 	uvicorn churn_predictor.api.main:app --reload --host 0.0.0.0 --port 8000
