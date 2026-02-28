@@ -7,6 +7,8 @@ pipeline with a FastAPI inference service backed by XGBoost.
 
 **Stack:** Python 3.11+, pandas, scikit-learn, XGBoost, FastAPI, Pydantic, pytest
 
+**Repository:** https://github.com/samiksh19/churn-predictor (branch: `master`)
+
 ---
 
 ## Coding Standards
@@ -15,6 +17,10 @@ pipeline with a FastAPI inference service backed by XGBoost.
 - All functions and methods must have complete type annotations.
 - `mypy --strict` must pass with zero errors on **both** `src/` and `tests/`.
 - Never use `Any` unless there is no alternative; add a comment explaining why.
+- Never add `# type: ignore` comments speculatively. Library stubs improve over
+  time and stale ignores become `unused-ignore` errors under `--warn-unused-ignores`
+  (which strict mode enables). Add only when mypy reports an error with no other
+  fix, and remove them as soon as mypy no longer needs them.
 
 ### Logging
 - Never use `print()`. Use Python's `logging` module everywhere.
@@ -75,6 +81,15 @@ together** at API startup. Both live in `CHURN_MODEL_DIR`:
 
 The API enters **degraded mode** (HTTP 503 on prediction endpoints) if either
 file is missing at startup.
+
+> **Fresh-clone workflow:** both artefact files are excluded from git
+> (`.gitignore` pattern `models/*.joblib`). After cloning the repo, the API
+> cannot serve predictions until you train and save the model locally:
+> ```bash
+> python -m churn_predictor.models.trainer   # or your training script
+> # produces models/churn_model.joblib and models/churn_engineer.joblib
+> make run
+> ```
 
 ### Training vs inference — critical distinction
 - **Training:** call `FeatureEngineer.fit_transform(X_train)` — fits scalers
