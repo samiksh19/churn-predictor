@@ -5,6 +5,9 @@ all: install lint typecheck test
 install:
 	pip install -e ".[dev]"
 
+train:
+	python -m churn_predictor.train
+
 test:
 	pytest
 

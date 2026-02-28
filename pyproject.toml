@@ -18,6 +18,9 @@ dependencies = [
     "joblib>=1.3",
 ]
 
+[project.scripts]
+churn-train = "churn_predictor.train:main"
+
 [project.optional-dependencies]
 dev = [
     "ruff>=0.3",
